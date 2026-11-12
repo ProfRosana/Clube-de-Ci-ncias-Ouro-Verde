@@ -1,0 +1,868 @@
+/* =========================================
+   CORES
+========================================= */
+
+:root {
+
+    --verde-muito-escuro: #082516;
+    --verde-escuro: #123d24;
+    --verde-principal: #21613a;
+    --verde-medio: #4c8656;
+    --verde-claro: #b8d790;
+
+    --dourado: #d8c169;
+
+    --creme: #f6f3e9;
+    --bege: #ebe5d7;
+
+    --branco: #ffffff;
+
+    --texto: #29352e;
+    --texto-suave: #5f6b63;
+
+    --largura-site: 1280px;
+
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    background:
+        var(--creme);
+
+    color:
+        var(--texto);
+
+    line-height: 1.65;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+
+    width:
+        min(
+            var(--largura-site),
+            calc(100% - 48px)
+        );
+
+    margin:
+        0 auto;
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.menu-principal {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        linear-gradient(
+            90deg,
+            #082516,
+            #123d24,
+            #174b2b
+        );
+
+    border-bottom:
+        2px solid
+        rgba(216,193,105,0.8);
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.18);
+}
+
+.menu-container {
+
+    width:
+        min(
+            1500px,
+            calc(100% - 40px)
+        );
+
+    min-height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    gap: 35px;
+}
+
+.menu-marca {
+
+    color:
+        var(--dourado);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+.menu-lista {
+
+    display: flex;
+
+    justify-content:
+        flex-end;
+
+    align-items: center;
+}
+
+.menu-lista a {
+
+    display: block;
+
+    padding:
+        24px 12px 21px;
+
+    color:
+        white;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    border-bottom:
+        3px solid transparent;
+
+    transition:
+        0.25s ease;
+}
+
+.menu-lista a:hover,
+.menu-lista .menu-ativo {
+
+    color:
+        var(--verde-claro);
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border-bottom-color:
+        var(--dourado);
+}
+
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+.secao-apresentacao {
+
+    padding:
+        95px 0;
+
+    background:
+        white;
+
+    text-align: center;
+}
+
+.apresentacao-conteudo {
+
+    max-width:
+        1050px;
+}
+
+.rotulo-secao {
+
+    margin-bottom:
+        10px;
+
+    color:
+        var(--verde-medio);
+
+    font-size:
+        0.78rem;
+
+    font-weight: 700;
+
+    letter-spacing:
+        3px;
+
+    text-transform:
+        uppercase;
+}
+
+.titulo-secao {
+
+    color:
+        var(--verde-escuro);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        clamp(
+            2.2rem,
+            4vw,
+            3.5rem
+        );
+
+    line-height:
+        1.15;
+}
+
+.linha-titulo {
+
+    width: 90px;
+
+    height: 3px;
+
+    margin:
+        22px auto 28px;
+
+    background:
+        var(--dourado);
+}
+
+.texto-destaque {
+
+    margin-bottom:
+        18px;
+
+    color:
+        var(--verde-principal);
+
+    font-size:
+        1.2rem;
+
+    font-weight:
+        600;
+}
+
+.texto-apresentacao {
+
+    max-width:
+        900px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--texto-suave);
+
+    font-size:
+        1.02rem;
+}
+
+
+/* =========================================
+   ÁREA DOS CARDS
+========================================= */
+
+.secao-acessos {
+
+    padding:
+        95px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f6f3e9,
+            #edf4e9
+        );
+}
+
+.cabecalho-secao {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        minmax(300px,500px);
+
+    align-items: end;
+
+    gap: 45px;
+
+    margin-bottom:
+        45px;
+}
+
+.descricao-secao {
+
+    color:
+        var(--texto-suave);
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.grade-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    gap:
+        28px;
+}
+
+.card-acesso {
+
+    overflow: hidden;
+
+    background:
+        white;
+
+    border-radius:
+        20px;
+
+    border:
+        1px solid
+        rgba(30,95,55,0.12);
+
+    box-shadow:
+        0 8px 28px
+        rgba(20,75,40,0.09);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card-acesso:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 18px 38px
+        rgba(20,75,40,0.16);
+}
+
+
+/* FOTO DOS CARDS */
+
+.card-imagem-link {
+
+    display: block;
+
+    overflow: hidden;
+
+    height: 235px;
+}
+
+.card-imagem {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.card-acesso:hover
+.card-imagem {
+
+    transform:
+        scale(1.05);
+}
+
+
+/* TEXTO DO CARD */
+
+.card-conteudo {
+
+    padding:
+        27px;
+}
+
+.card-numero {
+
+    display: block;
+
+    margin-bottom:
+        7px;
+
+    color:
+        var(--dourado);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        0.8rem;
+
+    font-weight:
+        700;
+}
+
+.card-acesso h3 {
+
+    margin-bottom:
+        12px;
+
+    color:
+        var(--verde-escuro);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        1.35rem;
+}
+
+.card-acesso p {
+
+    min-height:
+        90px;
+
+    margin-bottom:
+        18px;
+
+    color:
+        var(--texto-suave);
+
+    font-size:
+        0.92rem;
+}
+
+.botao-card {
+
+    color:
+        var(--verde-principal);
+
+    font-weight:
+        700;
+
+    font-size:
+        0.85rem;
+
+    text-decoration:
+        none;
+}
+
+.botao-card:hover {
+
+    color:
+        var(--verde-escuro);
+}
+
+
+/* =========================================
+   ÁREA DO CLUBE
+========================================= */
+
+.secao-clube {
+
+    padding:
+        90px 0;
+
+    background:
+        white;
+}
+
+.chamada-clube {
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr 0.9fr;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #082516,
+            #1c6338
+        );
+
+    border-radius:
+        26px;
+
+    box-shadow:
+        0 18px 45px
+        rgba(10,55,30,0.18);
+}
+
+.chamada-clube-texto {
+
+    padding:
+        60px;
+}
+
+.rotulo-claro {
+
+    color:
+        var(--verde-claro);
+}
+
+.chamada-clube h2 {
+
+    margin-bottom:
+        20px;
+
+    color:
+        white;
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        clamp(
+            2rem,
+            4vw,
+            3.4rem
+        );
+
+    line-height:
+        1.15;
+}
+
+.chamada-clube-texto p:last-child {
+
+    color:
+        #dce8dd;
+}
+
+
+/* ATALHOS */
+
+.atalhos-clube {
+
+    display: flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+
+    padding:
+        35px;
+
+    background:
+        rgba(255,255,255,0.07);
+}
+
+.atalho {
+
+    display: grid;
+
+    grid-template-columns:
+        55px 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        17px;
+
+    padding:
+        21px;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.13);
+
+    transition:
+        background 0.25s;
+}
+
+.atalho:hover {
+
+    background:
+        rgba(255,255,255,0.08);
+}
+
+.atalho-icone {
+
+    font-size:
+        1.7rem;
+}
+
+.atalho strong {
+
+    display:
+        block;
+
+    color:
+        var(--verde-claro);
+}
+
+.atalho small {
+
+    color:
+        #e6eee5;
+}
+
+
+/* =========================================
+   INSTITUCIONAL
+========================================= */
+
+.secao-institucional {
+
+    padding:
+        20px 0 95px;
+
+    background:
+        white;
+}
+
+.painel-institucional {
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr 0.9fr;
+
+    overflow: hidden;
+
+    background:
+        #f3f5ed;
+
+    border-radius:
+        24px;
+
+    border:
+        1px solid
+        rgba(25,80,45,0.12);
+}
+
+.painel-texto {
+
+    padding:
+        55px;
+}
+
+.painel-texto h2 {
+
+    margin-bottom:
+        20px;
+
+    color:
+        var(--verde-escuro);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        clamp(
+            2rem,
+            3vw,
+            3rem
+        );
+}
+
+.painel-texto p:last-child {
+
+    color:
+        var(--texto-suave);
+}
+
+.dados-institucionais {
+
+    display: flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+
+    padding:
+        40px;
+
+    background:
+        #e7efe1;
+}
+
+.dado {
+
+    display: grid;
+
+    grid-template-columns:
+        50px 1fr;
+
+    gap:
+        16px;
+
+    padding:
+        20px 0;
+
+    border-bottom:
+        1px solid
+        rgba(20,70,40,0.12);
+}
+
+.dado:last-child {
+
+    border-bottom:
+        none;
+}
+
+.dado > span {
+
+    font-size:
+        1.5rem;
+}
+
+.dado strong {
+
+    color:
+        var(--verde-principal);
+}
+
+.dado p {
+
+    color:
+        var(--texto-suave);
+
+    font-size:
+        0.88rem;
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.rodape-principal {
+
+    background:
+        var(--verde-muito-escuro);
+
+    color:
+        #d9e6dc;
+}
+
+.rodape-conteudo {
+
+    min-height:
+        180px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        40px;
+
+    padding:
+        40px 0;
+}
+
+.rodape-titulo {
+
+    color:
+        var(--dourado);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        1.3rem;
+
+    font-weight:
+        700;
+}
+
+.rodape-localizacao {
+
+    text-align:
+        right;
+}
+
+.rodape-final {
+
+    padding:
+        17px;
+
+    text-align:
+        center;
+
+    background:
+        rgba(0,0,0,0.17);
+
+    font-size:
+        0.76rem;
+
+    color:
+        #afc1b2;
+}

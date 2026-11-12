@@ -1,0 +1,455 @@
+/* =========================================
+   NOTEBOOK
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .cabecalho-conteudo {
+
+        grid-template-columns:
+            200px
+            1fr
+            200px;
+    }
+
+    .cabecalho-logo img {
+
+        width: 190px;
+        height: 190px;
+    }
+
+    .logo-colegio {
+
+        width: 205px;
+        height: 205px;
+
+        padding: 18px;
+    }
+
+    .logo-colegio img {
+
+        width: 170px;
+        height: 170px;
+    }
+
+    .grade-cards {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .menu-container {
+
+        flex-direction:
+            column;
+
+        padding-top:
+            12px;
+
+        gap: 4px;
+    }
+
+    .menu-lista {
+
+        flex-wrap:
+            wrap;
+
+        justify-content:
+            center;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+    .cabecalho-principal,
+    .cabecalho-sobreposicao {
+
+        min-height:
+            500px;
+    }
+
+    .cabecalho-sobreposicao {
+
+        padding:
+            38px 20px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.74
+            );
+    }
+
+    .cabecalho-conteudo {
+
+        grid-template-columns:
+            140px
+            1fr
+            140px;
+
+        gap:
+            15px;
+    }
+
+    .cabecalho-logo img {
+
+        width: 135px;
+        height: 135px;
+    }
+
+    .logo-colegio {
+
+        width: 145px;
+        height: 145px;
+
+        padding: 13px;
+    }
+
+    .logo-colegio img {
+
+        width: 115px;
+        height: 115px;
+    }
+
+    .cabecalho-linha-menor {
+
+        font-size:
+            1.5rem;
+
+        letter-spacing:
+            3px;
+    }
+
+    .cabecalho-texto h1,
+    .cabecalho-texto .cabecalho-titulo {
+
+        font-size:
+            clamp(
+                3rem,
+                8vw,
+                4.8rem
+            );
+    }
+
+    .cabecalho-escola {
+
+        font-size:
+            0.86rem;
+    }
+
+    .cabecalho-niveis {
+
+        font-size:
+            0.76rem;
+    }
+
+    .cabecalho-local {
+
+        font-size:
+            0.68rem;
+    }
+
+    .cabecalho-secao {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .chamada-clube,
+    .painel-institucional {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media (max-width: 620px) {
+
+    .container {
+
+        width:
+            calc(
+                100% - 28px
+            );
+    }
+
+    .cabecalho-principal {
+
+        min-height:
+            auto;
+    }
+
+    .cabecalho-sobreposicao {
+
+        min-height:
+            auto;
+
+        padding:
+            30px 15px;
+    }
+
+    .cabecalho-conteudo {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap:
+            25px 12px;
+    }
+
+    .cabecalho-texto {
+
+        grid-column:
+            1 / -1;
+
+        grid-row:
+            1;
+    }
+
+    .area-logo {
+
+        grid-row:
+            2;
+    }
+
+    .cabecalho-linha-menor {
+
+        font-size:
+            1.35rem;
+
+        letter-spacing:
+            2px;
+    }
+
+    .cabecalho-texto h1,
+    .cabecalho-texto .cabecalho-titulo {
+
+        font-size:
+            clamp(
+                3.1rem,
+                15vw,
+                4.4rem
+            );
+
+        letter-spacing:
+            2px;
+    }
+
+    .cabecalho-escola {
+
+        max-width:
+            400px;
+
+        font-size:
+            0.8rem;
+    }
+
+    .logo-colegio {
+
+        width:
+            135px;
+
+        height:
+            135px;
+    }
+
+    .logo-colegio img {
+
+        width:
+            108px;
+
+        height:
+            108px;
+    }
+
+    .cabecalho-logo img {
+
+        width:
+            130px;
+
+        height:
+            130px;
+    }
+
+    /* menu continua fixo no topo no celular */
+    .menu-principal {
+
+        position:
+            sticky;
+    }
+
+    .menu-marca {
+
+        display:
+            none;
+    }
+
+    .menu-lista {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        width:
+            100%;
+    }
+
+    .menu-lista a {
+
+        padding:
+            11px 7px;
+
+        text-align:
+            center;
+
+        border:
+            1px solid
+            rgba(255,255,255,0.09);
+    }
+
+    .secao-apresentacao,
+    .secao-acessos,
+    .secao-clube {
+
+        padding:
+            65px 0;
+    }
+
+    .grade-cards {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .card-imagem-link {
+
+        height:
+            250px;
+    }
+
+    .card-acesso p {
+
+        min-height:
+            auto;
+    }
+
+    .chamada-clube-texto,
+    .painel-texto {
+
+        padding:
+            35px 27px;
+    }
+
+    .atalhos-clube,
+    .dados-institucionais {
+
+        padding:
+            25px;
+    }
+
+    .rodape-conteudo {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .rodape-localizacao {
+
+        text-align:
+            left;
+    }
+
+}
+
+
+/* =========================================
+   CELULAR PEQUENO
+========================================= */
+
+@media (max-width: 380px) {
+
+    .logo-colegio {
+
+        width:
+            112px;
+
+        height:
+            112px;
+    }
+
+    .logo-colegio img {
+
+        width:
+            88px;
+
+        height:
+            88px;
+    }
+
+    .cabecalho-logo img {
+
+        width:
+            105px;
+
+        height:
+            105px;
+    }
+
+    .menu-lista {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+/* =========================================
+   CARTÕES DA PÁGINA INICIAL CENTRALIZADOS
+   (quando a última linha tem menos cartões)
+========================================= */
+
+.grade-cards-centro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.grade-cards-centro .card-acesso {
+    width: calc((100% - 56px) / 3);
+}
+
+@media (max-width: 1200px) {
+
+    .grade-cards-centro .card-acesso {
+        width: calc((100% - 28px) / 2);
+    }
+
+}
+
+@media (max-width: 620px) {
+
+    .grade-cards-centro .card-acesso {
+        width: 100%;
+    }
+
+}

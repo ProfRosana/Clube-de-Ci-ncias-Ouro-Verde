@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- =====================================================
+         CONFIGURAÇÕES DA PÁGINA
+    ====================================================== -->
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        name="description"
+        content="Receitas com erva-mate criativas e tradicionais: do chimarrão e tereré a doces, pães e pratos salgados."
+    >
+    <meta
+        name="author"
+        content="Clube de Ciências Ouro Verde"
+    >
+    <meta
+        name="theme-color"
+        content="#123d24"
+    >
+    <title>Receitas | Clube de Ciências Ouro Verde</title>
+
+    <!-- FONTES (não alterar) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS (não alterar)
+         Atenção: nas páginas da pasta "paginas" todos os
+         caminhos começam com ../ (volta uma pasta). -->
+    <link rel="stylesheet" href="../css/style.css?v=7">
+    <link rel="stylesheet" href="../css/hero.css?v=7">
+    <link rel="stylesheet" href="../css/paginas.css?v=7">
+    <link rel="stylesheet" href="../css/responsivo.css?v=7">
+    <!-- Estilos exclusivos da página de receitas -->
+    <style>
+        .grid-receitas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card-receita {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-receita:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-receita-imagem {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-receita-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-receita-conteudo {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-receita-titulo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #123d24;
+            margin: 0 0 0.8rem 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        .card-receita-info {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .card-receita-avaliacao {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+            padding: 0.8rem 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .estrelas {
+            display: flex;
+            gap: 0.1rem;
+            font-size: 1rem;
+            color: #ffc107;
+        }
+
+        .estrelas-vazias {
+            color: #c9c9c9;
+        }
+
+        .aviso-avaliacao {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 2rem;
+            padding: 26px 30px;
+            background: #fff;
+            border-left: 5px solid #d8c169;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .aviso-avaliacao h2 {
+            margin-bottom: 6px;
+            color: #123d24;
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+        }
+
+        .aviso-avaliacao p {
+            color: #5f6b63;
+            font-size: 0.95rem;
+        }
+
+        .aviso-avaliacao-botao {
+            display: inline-block;
+            flex-shrink: 0;
+            padding: 0.8rem 1.3rem;
+            background-color: #d8c169;
+            color: #123d24;
+            border-radius: 4px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        a.aviso-avaliacao-botao:hover {
+            background-color: #c9b257;
+        }
+
+        .aviso-avaliacao-breve {
+            background-color: #eee;
+            color: #777;
+            font-weight: 600;
+        }
+
+        .modal-avaliacao p {
+            margin: 0.6rem 0 1rem;
+            color: #555;
+        }
+
+        .card-receita-avaliacao small {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        .card-receita-botao {
+            margin-top: auto;
+            padding: 0.8rem;
+            background-color: #123d24;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .card-receita-botao:hover {
+            background-color: #0d2918;
+        }
+
+        @media (max-width: 768px) {
+            .grid-receitas {
+                grid-template-columns: 1fr;
+            }
+
+            .aviso-avaliacao {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- ======================================
+         CABEÇALHO / BANNER
+         (igual ao da página inicial — não alterar)
+    ======================================= -->
+    <header
+        class="cabecalho-principal"
+        id="inicio"
+    >
+        <div class="cabecalho-sobreposicao">
+            <div class="cabecalho-conteudo">
+                <!-- LOGO DO COLÉGIO -->
+                <div class="area-logo area-logo-colegio">
+                    <a
+                        class="cabecalho-logo logo-colegio"
+                        href="../index.html"
+                        aria-label="Página inicial"
+                    >
+                        <img
+                            src="../imagens/logos/logo-eugenio.png"
+                            alt="Logotipo do Colégio Estadual do Campo Professor Eugênio de Almeida"
+                        >
+                    </a>
+                </div>
+                <!-- NOME DO SITE -->
+                <div class="cabecalho-texto">
+                    <p class="cabecalho-linha-menor">
+                        Clube de Ciências
+                    </p>
+                    <p class="cabecalho-titulo">
+                        Ouro Verde
+                    </p>
+                    <div class="linha-decorativa"></div>
+                    <p class="cabecalho-escola">
+                        Colégio Estadual do Campo Professor Eugênio de Almeida
+                    </p>
+                    <p class="cabecalho-niveis">
+                        Ensino Fundamental, Médio e Técnico
+                    </p>
+                    <p class="cabecalho-local">
+                        Distrito de Fluviópolis • São Mateus do Sul • Paraná
+                    </p>
+                </div>
+                <!-- LOGO DO CLUBE -->
+                <div class="area-logo">
+                    <a
+                        class="cabecalho-logo"
+                        href="../index.html"
+                        aria-label="Clube de Ciências Ouro Verde"
+                    >
+                        <img
+                            src="../imagens/logos/logo-clube.png"
+                            alt="Logo do Clube de Ciências Ouro Verde"
+                        >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======================================
+         MENU FIXO (não alterar)
+         Só tem Início e Notícias. As outras páginas
+         são abertas pelos cartões da página inicial.
+    ======================================= -->
+    <nav
+        class="menu-principal"
+        aria-label="Menu principal"
+    >
+        <div class="menu-container">
+            <a
+                class="menu-marca"
+                href="../index.html"
+            >
+                Ouro Verde
+            </a>
+            <ul class="menu-lista">
+                <li>
+                    <a href="../index.html">
+                        Início
+                    </a>
+                </li>
+                <li>
+                    <a href="noticias.html">
+                        Notícias
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ======================================
+         CONTEÚDO PRINCIPAL
+         A PARTIR DAQUI CADA PÁGINA É DIFERENTE.
+    ======================================= -->
+    <main class="pagina-interna">
+
+        <!-- ABERTURA DA PÁGINA: trilha, rótulo, título e introdução -->
+        <section class="abertura-pagina">
+            <div class="container">
+                <!-- Trilha: mostra onde o visitante está -->
+                <nav class="trilha" aria-label="Você está em">
+                    <a href="../index.html">Início</a>
+                    <span>›</span>
+                    <strong>Receitas</strong>
+                </nav>
+                <p class="rotulo-secao">
+                    Usos e receitas
+                </p>
+                <h1>
+                    Receitas com Erva-Mate
+                </h1>
+                <div class="linha-titulo"></div>
+                <div class="introducao-pagina">
+                    <p>
+                        Se você gosta de experimentar sabores diferentes ou quer conhecer
+                        novas maneiras de utilizar a erva-mate na cozinha, prepare-se para
+                        encontrar receitas simples, criativas e cheias de identidade.
+                        Explore a página, escolha sua receita favorita e descubra como um
+                        ingrediente tão tradicional pode ganhar novos sabores e
+                        possibilidades!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEÚDO DA PÁGINA -->
+        <section class="conteudo-pagina">
+            <div class="container">
+
+                <!-- ===== COMEÇAR O CONTEÚDO AQUI ===== -->
+
+                <!-- AVISO AOS VISITANTES SOBRE AS AVALIAÇÕES -->
+                <div class="aviso-avaliacao">
+                    <div>
+                        <h2>
+                            ⭐ Avaliações em andamento
+                        </h2>
+                        <p>
+                            As receitas desta página estão em fase de pesquisa,
+                            produção e avaliação pelos estudantes do Clube.
+                            Por isso, ainda não têm notas. Experimentou alguma?
+                            Envie sua nota de 1 a 5 pelo nosso formulário
+                            e ajude a construir esta avaliação!
+                        </p>
+                    </div>
+                    <!-- O botão é criado automaticamente a partir
+                         do LINK_FORMULARIO, no fim desta página. -->
+                    <div id="botaoFormulario"></div>
+                </div>
+
+                <!-- Os cartões das receitas são criados
+                     automaticamente pela lista "receitas"
+                     que fica no fim desta página. -->
+                <div class="grid-receitas" id="gridReceitas"></div>
+
+                <!-- ===== TERMINAR O CONTEÚDO AQUI ===== -->
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================================
+         RODAPÉ (não alterar)
+    ======================================= -->
+    <footer class="rodape-principal">
+        <div class="container rodape-conteudo">
+            <div>
+                <p class="rodape-titulo">
+                    Clube de Ciências Ouro Verde
+                </p>
+                <p>
+                    Colégio Estadual do Campo Professor Eugênio de Almeida
+                </p>
+            </div>
+            <div class="rodape-localizacao">
+                <p>
+                    Ensino Fundamental, Médio e Técnico
+                </p>
+                <p>
+                    Distrito de Fluviópolis
+                </p>
+                <p>
+                    São Mateus do Sul — Paraná
+                </p>
+            </div>
+        </div>
+        <div class="rodape-final">
+            © 2026 Clube de Ciências Ouro Verde
+        </div>
+    </footer>
+
+    <!-- JANELA QUE ABRE AO CLICAR EM "VER RECEITA" -->
+    <div class="modal" id="modalReceita">
+        <div class="modal-conteudo">
+            <button class="modal-fechar" onclick="fecharModal()" aria-label="Fechar">&times;</button>
+            <div id="conteudoModal"></div>
+        </div>
+    </div>
+
+    <script>
+        /* =================================================
+           LISTA DE RECEITAS
+
+           Para incluir uma receita nova, copie um bloco
+           inteiro { ... }, cole antes do ]; final e
+           ATENÇÃO:
+           - cada item termina com vírgula: titulo: "...",
+           - entre um bloco e outro também vai vírgula: },
+           - use sempre as palavras sem acento: porcoes,
+             avaliacoes, totalAvaliacoes
+           - avaliacoes: deixe null enquanto a receita não
+             for avaliada. Depois de calcular a média das
+             notas do formulário, troque por um número de
+             1 a 5, com PONTO e sem aspas (ex.: 4.5), e
+             coloque em totalAvaliacoes quantas notas
+             foram recebidas (ex.: 12)
+           - o id é um número diferente para cada receita
+           - imagem: caminho da foto, começando com ../imagens/
+             (sem acento e sem espaço no nome do arquivo).
+             Sem foto? Apague a linha imagem e o emoji
+             aparece no lugar.
+        ================================================== */
+        const receitas = [
+            {
+                id: 1,
+                titulo: "Brigadeiro de Erva-Mate",
+                emoji: "🍫",
+                imagem: "../imagens/eduardo/brigadeiro-erva-mate.jpg",
+                tempo: "20 min",
+                porcoes: "10",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["1 lata de leite condensado", "1 colher de sopa de manteiga", "1 colher de sobremesa de erva-mate peneirada", "200 g de chocolate ao leite", "Corante verde (opcional)"],
+                preparo: ["Derreta o chocolate em banho-maria.", "Coloque o chocolate derretido em forminhas e leve à geladeira.", "Em uma panela, coloque o leite condensado, a manteiga e a erva-mate peneirada.", "Cozinhe em fogo baixo, mexendo sempre até desgrudar do fundo da panela.", "Adicione algumas gotas de corante verde antes do ponto final.", "Desenforme os copinhos de chocolate e preencha com o brigadeiro."],
+                fonte: "TudoGostoso"
+            },
+            {
+                id: 2,
+                titulo: "Pão de Ló com Erva-Mate",
+                emoji: "🍰",
+                imagem: "../imagens/eduardo/pao-de-lo-erva-mate.jpg",
+                tempo: "50 min",
+                porcoes: "8",
+                dificuldade: "Média",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["5 ovos", "3 colheres de sopa de suco de laranja", "15 colheres de sopa de açúcar", "15 colheres de sopa de farinha de trigo", "1½ colher de fermento químico", "3 colheres de sopa de pó de erva-mate", "100 g de nozes tostadas", "100 g de goiabada picada"],
+                preparo: ["Separe as claras das gemas.", "Bata as claras até ponto de neve, depois adicione açúcar.", "Acrescente as gemas uma a uma.", "Misture farinha, erva-mate e fermento.", "Transfira para forma untada, distribua nozes e goiabada.", "Asse a 180°C por 35 minutos."],
+                fonte: "Bons Fluidos"
+            },
+            {
+                id: 3,
+                titulo: "Sorvete de Erva-Mate",
+                emoji: "🍦",
+                imagem: "../imagens/eduardo/sorvete-erva-mate.jpg",
+                tempo: "240 min",
+                porcoes: "12",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["1 litro de leite", "1½ xícara de açúcar", "1 colher de sopa de liga", "2 colheres de sopa de pó de erva-mate"],
+                preparo: ["Ferva o leite e misture o pó de erva-mate.", "Deixe esfriar e bata no liquidificador.", "Adicione açúcar e liga, bata por 3 minutos.", "Leve ao freezer por 4 horas.", "Bata novamente até ficar cremoso.", "Volte ao freezer até firmar."],
+                fonte: "Escola do Chimarrão"
+            },
+            {
+                id: 4,
+                titulo: "Pão com Erva-Mate",
+                emoji: "🥖",
+                tempo: "120 min",
+                porcoes: "8",
+                dificuldade: "Média",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["1 xícara de leite morno", "1 colher de sopa de fermento biológico", "2 colheres de sopa de açúcar", "¼ xícara de óleo", "1 colher de chá de sal", "1 colher de sopa de erva-mate", "3 xícaras de farinha de trigo"],
+                preparo: ["Misture ingredientes líquidos.", "Adicione erva-mate e farinha aos poucos.", "Sove a massa bem até ficar macia.", "Deixe crescer por 1 hora.", "Modele os pães e coloque em forma.", "Asse a 180°C por 30 minutos."],
+                fonte: "Madrugada"
+            },
+            {
+                id: 5,
+                titulo: "Pão de Queijo de Erva-Mate",
+                emoji: "🧀",
+                imagem: "../imagens/eduardo/pao-de-queijo-erva-mate.jpg",
+                tempo: "35 min",
+                porcoes: "24",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["3 ovos", "1 xícara de leite", "½ xícara de óleo", "2 colheres de sopa de queijo ralado", "½ xícara de água fervendo", "500 g de polvilho azedo", "3 colheres de sopa de erva-mate"],
+                preparo: ["Bata ovos, leite, óleo, sal e queijo no liquidificador.", "Adicione água fervendo.", "Acrescente polvilho aos poucos.", "Coe a erva-mate e adicione à mistura.", "Distribua em forminhas.", "Asse a 250°C por 20 minutos."],
+                fonte: "G1 Rio Grande do Sul"
+            },
+            {
+                id: 6,
+                titulo: "Chimarrão Tradicional",
+                emoji: "🍵",
+                tempo: "5 min",
+                porcoes: "4",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["Erva-mate de qualidade", "Água quente (70-80°C)", "Cuia", "Bomba"],
+                preparo: ["Encha a cuia com 2/3 de erva-mate.", "Forme o monte inclinando a cuia.", "Hidrate com água morna.", "Insira a bomba corretamente.", "Adicione água quente no mesmo ponto.", "Sirva e reponha a água até o sabor acabar."],
+                fonte: "Westwing"
+            },
+            {
+                id: 7,
+                titulo: "Tereré Gelado",
+                emoji: "🧊",
+                tempo: "5 min",
+                porcoes: "4",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["Erva-mate fina", "Água gelada", "Gelo", "Cuia", "Bomba"],
+                preparo: ["Escolha erva-mate adequada.", "Encha a cuia até 2/3 e incline.", "Adicione água gelada.", "Insira a bomba com filtro para baixo.", "Beba e reabasteça com água gelada conforme necessário."],
+                fonte: "Coca Mar"
+            },
+            {
+                id: 8,
+                titulo: "Mousse de Erva-Mate",
+                emoji: "☁️",
+                tempo: "270 min",
+                porcoes: "15",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["3 colheres de sopa de erva-mate", "250 ml de água", "1 pacote de gelatina de limão", "1 lata de leite condensado", "1 lata de creme de leite", "3 colheres de sopa de açúcar"],
+                preparo: ["Ferva água com gelatina e erva-mate.", "Coe a mistura.", "Bata no liquidificador com outros ingredientes.", "Coloque em refratário.", "Leve à geladeira de 4 a 6 horas."],
+                fonte: "TudoGostoso"
+            },
+            {
+                id: 9,
+                titulo: "Pesto de Erva-Mate",
+                emoji: "🌿",
+                imagem: "../imagens/eduardo/pesto-erva-mate.jpg",
+                tempo: "20 min",
+                porcoes: "6",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["1 xícara de nozes, castanhas ou amêndoas", "3/4 xícara de azeite de oliva", "Sal a gosto", "2 dentes de alho", "10 folhas frescas de erva-mate"],
+                preparo: ["Bata todos os ingredientes no liquidificador."],
+                fonte: "https://redeglobo.globo.com/rpc/estudio-c/extras-estudio-c/noticia/aprenda-tres-receitas-deliciosas-com-erva-mate.ghtml"
+            },
+            {
+                id: 10,
+                titulo: "Bolacha de Erva-Mate",
+                emoji: "🍪",
+                imagem: "../imagens/eduardo/bolacha-erva-mate.jpg",
+                tempo: "20 min",
+                porcoes: "10",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["1 colher de sopa de erva-mate peneirada", "2 colheres de sopa de óleo vegetal", "150 gramas de farinha de aveia", "1 banana caturra"],
+                preparo: ["Comece amassando a banana caturra, que precisa estar bem madura.", "Acrescente a erva-mate peneirada.", "Adicione parte do óleo na mistura e reserve o restante para untar a forma.", "Adicione a aveia aos poucos até dar o ponto, quando a massa começa a ficar mais firme.", "Unte a forma com óleo e comece a modelar as bolachas.", "Leve ao forno pré-aquecido a 200 °C por 10 minutos."],
+                fonte: "https://receitas.globo.com/regionais/rpc/plug/bolacha-de-erva-mate.ghtml"
+            },
+            {
+                id: 11,
+                titulo: "Alfajor de Erva-Mate",
+                emoji: "🥮",
+                imagem: "../imagens/eduardo/alfajor-erva-mate.jpg",
+                tempo: "15 min",
+                porcoes: "20",
+                dificuldade: "Média",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["3 gemas", "200 g de manteiga ou margarina", "2 xícaras (chá) de açúcar", "200 g de amido de milho", "1 colher (sopa) de açúcar de baunilha", "1 colher (sopa) de fermento em pó", "2 colheres (sopa) de erva-mate", "400 g de farinha de trigo", "Doce de leite e coco ralado para montar"],
+                preparo: ["Em uma vasilha, coloque as gemas, o açúcar e a margarina (em temperatura ambiente) e misture.", "Acrescente a erva-mate, o açúcar de baunilha, o amido de milho, o fermento e a farinha.", "Misture com as mãos.", "Coloque farinha em uma mesa limpa e sove a massa.", "A massa está pronta quando não grudar nas mãos. Estique-a com o auxílio de um rolo; ela é delicada, mas não a deixe muito fina.", "Use a boca de um copo para cortar os discos (outros formatos também servem) e asse em forma untada por 10 minutos.", "Não deixe por mais tempo, porque os discos podem se quebrar.", "Monte o alfajor com dois discos.", "Recheie com doce de leite e polvilhe com coco ralado."],
+                fonte: "https://www.tudogostoso.com.br/receita/77955-alfajor-de-erva-mate.html"
+            },
+            {
+                id: 12,
+                titulo: "Marinada para Churrasco com Erva-Mate",
+                emoji: "🥩",
+                imagem: "../imagens/eduardo/marinada-erva-mate.jpg",
+                tempo: "30 min",
+                porcoes: "10",
+                dificuldade: "Fácil",
+                avaliacoes: null,
+                totalAvaliacoes: 0,
+                ingredientes: ["3 colheres de sopa de erva-mate moída grossa", "500 ml de água quente (80 °C)", "3 dentes de alho picados", "1 cebola ralada", "2 colheres de sopa de azeite", "1 colher de sopa de mostarda", "Sal grosso e pimenta-do-reino a gosto", "Suco de 1 limão"],
+                preparo: ["Prepare uma infusão concentrada: despeje a água quente sobre a erva-mate moída grossa e deixe por 15 minutos.", "Coe bem.", "Misture a infusão de mate com alho, cebola, azeite, mostarda, sal, pimenta e limão.", "Marine a carne (funciona especialmente bem com fraldinha, costela ou picanha) por no mínimo 4 horas na geladeira, de preferência de um dia para o outro.", "Asse na churrasqueira como de costume."],
+                fonte: "https://meuchimarrao.com.br/blog/erva-mate-na-culinaria-receitas/"
+            }
+        ];
+
+        /* =================================================
+           LINK DO FORMULÁRIO DE AVALIAÇÃO
+           Cole entre as aspas o link do formulário
+           (Google Forms, por exemplo). Enquanto estiver
+           vazio, o botão aparece como "em breve".
+        ================================================== */
+        const LINK_FORMULARIO = "";
+
+        /* Estrelas da receita: vazias enquanto não houver notas */
+        function mostrarAvaliacao(receita) {
+            if (receita.avaliacoes === null) {
+                return `
+                    <div class="estrelas estrelas-vazias">☆☆☆☆☆</div>
+                    <small>Ainda sem avaliação</small>`;
+            }
+            const cheias = Math.round(receita.avaliacoes);
+            return `
+                <div class="estrelas">${'★'.repeat(cheias)}${'☆'.repeat(5 - cheias)}</div>
+                <small>${receita.avaliacoes.toFixed(1).replace('.', ',')} (${receita.totalAvaliacoes} ${receita.totalAvaliacoes === 1 ? 'nota' : 'notas'})</small>`;
+        }
+
+        /* Botão do formulário (ou aviso de "em breve") */
+        function botaoFormulario() {
+            if (LINK_FORMULARIO) {
+                return `<a class="aviso-avaliacao-botao" href="${LINK_FORMULARIO}" target="_blank" rel="noopener">Avaliar uma receita ✍️</a>`;
+            }
+            return `<span class="aviso-avaliacao-botao aviso-avaliacao-breve">Formulário de avaliação em breve</span>`;
+        }
+
+        /* Aviso que aparece embaixo das fotos */
+        const LEGENDA_FOTO = "Imagem ilustrativa gerada por inteligência artificial a partir da receita.";
+
+        /* Foto da receita (ou o emoji, se não houver foto) */
+        function mostrarImagem(receita) {
+            if (receita.imagem) {
+                return `<img src="${receita.imagem}" alt="${receita.titulo}" loading="lazy">`;
+            }
+            return receita.emoji;
+        }
+
+        /* Mostra a fonte como link quando for um endereço da internet */
+        function formatarFonte(fonte) {
+            if (fonte.startsWith("http")) {
+                return `<a href="${fonte}" target="_blank" rel="noopener">${fonte}</a>`;
+            }
+            return fonte;
+        }
+
+        function renderizarReceitas() {
+            const grid = document.getElementById('gridReceitas');
+            grid.innerHTML = receitas.map(receita => `
+                <div class="card-receita">
+                    <div class="card-receita-imagem">${mostrarImagem(receita)}</div>
+                    <div class="card-receita-conteudo">
+                        <h2 class="card-receita-titulo">${receita.titulo}</h2>
+                        <div class="card-receita-info">
+                            <span>⏱️ ${receita.tempo}</span>
+                            <span>🍽️ ${receita.porcoes} porções</span>
+                            <span>📊 ${receita.dificuldade}</span>
+                        </div>
+                        <div class="card-receita-avaliacao">
+                            ${mostrarAvaliacao(receita)}
+                        </div>
+                        <button class="card-receita-botao" onclick="abrirModal(${receita.id})">Ver Receita →</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function abrirModal(id) {
+            const receita = receitas.find(r => r.id === id);
+            const modal = document.getElementById('modalReceita');
+            const conteudo = document.getElementById('conteudoModal');
+
+            conteudo.innerHTML = `
+                <h2 class="modal-titulo">${receita.emoji} ${receita.titulo}</h2>
+                ${receita.imagem ? `<figure class="modal-imagem"><img src="${receita.imagem}" alt="${receita.titulo}"><figcaption>${LEGENDA_FOTO}</figcaption></figure>` : ''}
+                <div class="modal-secao">
+                    <strong>⏱️ Tempo:</strong> ${receita.tempo}<br>
+                    <strong>🍽️ Porções:</strong> ${receita.porcoes}<br>
+                    <strong>📊 Dificuldade:</strong> ${receita.dificuldade}
+                </div>
+                <div class="modal-secao">
+                    <h3>Ingredientes</h3>
+                    <ul>${receita.ingredientes.map(ing => `<li>${ing}</li>`).join('')}</ul>
+                </div>
+                <div class="modal-secao">
+                    <h3>Modo de Preparo</h3>
+                    <ol>${receita.preparo.map(passo => `<li>${passo}</li>`).join('')}</ol>
+                </div>
+                <div class="modal-secao modal-avaliacao">
+                    <h3>Avaliação</h3>
+                    <div class="card-receita-avaliacao">${mostrarAvaliacao(receita)}</div>
+                    <p>Fez esta receita? Conte para nós o que achou, com uma nota de 1 a 5.</p>
+                    ${botaoFormulario()}
+                </div>
+                <div class="modal-fonte"><strong>Fonte:</strong> ${formatarFonte(receita.fonte)}</div>
+            `;
+
+            modal.classList.add('ativo');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModal() {
+            document.getElementById('modalReceita').classList.remove('ativo');
+            document.body.style.overflow = '';
+        }
+
+        /* Fecha a janela ao clicar fora dela ou apertar Esc */
+        window.addEventListener('click', function (event) {
+            if (event.target === document.getElementById('modalReceita')) {
+                fecharModal();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                fecharModal();
+            }
+        });
+
+        document.getElementById('botaoFormulario').innerHTML = botaoFormulario();
+        renderizarReceitas();
+    </script>
+
+</body>
+</html>
